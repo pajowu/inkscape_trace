@@ -1,0 +1,34 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 21ec448bc5..191cf5148a 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+ # -----------------------------------------------------------------------------
+ # Generate version file
+ # -----------------------------------------------------------------------------
+@@ -304,7 +309,10 @@ set(main_SRC
+ set(view_SRC
+   inkview-main.cpp
+ )
++set(trace_SRC
++  inktrace-main.cpp
++)
+
+ if(WIN32)
+   # Configure and add the platform specific resource files (enabling the app icon).
+   string(TIMESTAMP COPYRIGHT_YEAR %Y)
+@@ -327,6 +335,7 @@ endif()
+ # make executables for inkscape and inkview
+ add_executable(inkscape ${main_SRC})
+ add_executable(inkview ${view_SRC})
++add_executable(inktrace ${trace_SRC})
+ if(WIN32)
+   # Make the same executables again, but this time as console application (GUI applications can't print to the console)
+   add_executable(inkscape_com ${main_SRC})
+@@ -392,6 +401,7 @@ target_include_directories(inkscape_base INTERFACE ${2Geom_INCLUDE_DIRS})
+ # Link inkscape and inkview against inkscape_base
+ target_link_libraries(inkscape inkscape_base)
+ target_link_libraries(inkview inkscape_base)
++target_link_libraries(inktrace inkscape_base)
+ if(WIN32)
+     target_link_libraries(inkscape_com inkscape_base)
+     target_link_libraries(inkview_com inkscape_base)
